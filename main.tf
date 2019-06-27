@@ -53,3 +53,16 @@ resource "tfe_workspace" "gitlab-random" {
     oauth_token_id = tfe_oauth_client.gitlab.oauth_token_id
   }
 }
+
+// Workspace to test Cost Estimation
+resource "tfe_workspace" "cost-estimation-test" {
+  organization   = tfe_organization.hashicorp_v2.name
+  name           = "cost-estimation"
+  auto_apply     = false
+  queue_all_runs = true
+
+  vcs_repo {
+    identifier     = "davidcelis/cost-estimation-test"
+    oauth_token_id = tfe_oauth_client.github.oauth_token_id
+  }
+}
