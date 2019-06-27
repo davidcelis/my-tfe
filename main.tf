@@ -66,3 +66,24 @@ resource "tfe_workspace" "cost-estimation-test" {
     oauth_token_id = tfe_oauth_client.github.oauth_token_id
   }
 }
+
+resource "tfe_variable" "aws-access-key" {
+  key          = "AWS_ACCESS_KEY_ID"
+  value        = var.aws_access_key
+  category     = "env"
+  workspace_id = "${tfe_workspace.cost-estimation-test.id}"
+}
+
+resource "tfe_variable" "aws-secret-key" {
+  key          = "AWS_SECRET_ACCESS_KEY"
+  value        = var.aws_secret_key
+  category     = "env"
+  workspace_id = "${tfe_workspace.cost-estimation-test.id}"
+}
+
+resource "tfe_variable" "aws-region" {
+  key          = "AWS_DEFAULT_REGION"
+  value        = "us-east-1"
+  category     = "env"
+  workspace_id = "${tfe_workspace.cost-estimation-test.id}"
+}
