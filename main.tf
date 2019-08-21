@@ -6,14 +6,14 @@ provider "tfe" {
 }
 
 // The default organization
-resource "tfe_organization" "hashicorp_v2" {
-  name  = "hashicorp_v2"
-  email = "admin@${var.hostname}"
+resource "tfe_organization" "celis_brewery" {
+  name  = "celis-brewery"
+  email = "brewmaster@celis.beer"
 }
 
 // OAuth clients using Personal Access Tokens
 resource "tfe_oauth_client" "github" {
-  organization     = tfe_organization.hashicorp_v2.name
+  organization     = tfe_organization.celis_brewery.name
   api_url          = "https://api.github.com"
   http_url         = "https://github.com"
   oauth_token      = var.github_oauth_token
@@ -21,7 +21,7 @@ resource "tfe_oauth_client" "github" {
 }
 
 resource "tfe_oauth_client" "gitlab" {
-  organization     = tfe_organization.hashicorp_v2.name
+  organization     = tfe_organization.celis_brewery.name
   api_url          = "https://gitlab.com/api/v4"
   http_url         = "https://gitlab.com"
   oauth_token      = var.gitlab_oauth_token
@@ -31,7 +31,7 @@ resource "tfe_oauth_client" "gitlab" {
 
 // The ever-present `terraform-random` workspaces
 resource "tfe_workspace" "github-random" {
-  organization   = tfe_organization.hashicorp_v2.name
+  organization   = tfe_organization.celis_brewery.name
   name           = "github-random"
   auto_apply     = false
   queue_all_runs = true
@@ -43,7 +43,7 @@ resource "tfe_workspace" "github-random" {
 }
 
 resource "tfe_workspace" "gitlab-random" {
-  organization   = tfe_organization.hashicorp_v2.name
+  organization   = tfe_organization.celis_brewery.name
   name           = "gitlab-random"
   auto_apply     = false
   queue_all_runs = true
@@ -56,7 +56,7 @@ resource "tfe_workspace" "gitlab-random" {
 
 // Workspace to test Cost Estimation
 resource "tfe_workspace" "cost-estimation-test" {
-  organization   = tfe_organization.hashicorp_v2.name
+  organization   = tfe_organization.celis_brewery.name
   name           = "cost-estimation"
   auto_apply     = false
   queue_all_runs = true
